@@ -50,6 +50,8 @@ window.addEventListener('DOMContentLoaded', () => {
         elem.addEventListener("click",function(e){
             if (player=="X"){
                 makePlay(player, e)
+                // e.target.textContent="X";
+                // e.target.classList.add('X');
                 playerX.push(e.target.id);
                 playerXWins=checkWinner(winningCombo,playerX);
                 if (playerXWins==true){
@@ -60,6 +62,8 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             else {
                 makePlay(player, e)
+                // e.target.textContent="O";
+                // e.target.classList.add('O');
                 playerO.push(e.target.id);
                 playerOWins=checkWinner(winningCombo,playerO);
                 if (playerOWins==true){
@@ -69,12 +73,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 player="X";
               
             }
-            //console.log(`playerO: ${playerO}`);
-            //console.log(`playerX: ${playerX}`);
             console.log(checkWinner(winningCombo,playerO));
             console.log(checkWinner(winningCombo,playerX));
             });
-
             elem.addEventListener('mouseover', function(e) {
                 e.target.classList.add('hover');
             });
@@ -83,7 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 e.target.classList.remove('hover');
             });   
     });
-    //console.log(newGameBtns)
+
     newGameBtn.forEach(function(button){
         button.addEventListener("click", function(e){
             squares.forEach(function(elem,index){
@@ -92,6 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 elem.classList.remove('O');
                 gameStatus.innerHTML="Move your mouse over a square and click to play an X or an O."
                 gameStatus.classList.remove("you-won")
+                //restart button only half works. The board resets but you cannot continue to play
             })
         })
     })
