@@ -3,9 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
     let player="X";
     let playerXWins=false;
     let playerOWins=false;
-    //const winner=[];
     const gameStatus = document.getElementById("status");
-    const newGameBtns = document.querySelectorAll(".btn")
+    const newGameBtn = document.querySelectorAll(".btn")
     const playerX=[];
     const playerO=[];
     const combo1=[0,1,2];
@@ -37,19 +36,13 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         return checkCondition;
     }
+
     function makePlay(player, elem){
-        if (!(elem.target.textContent=="X" || elem.target.textContent=="O")){
+        if (!(elem.target.textContent=="X" || elem.target.textContent=="O") && (playerXWins==false && playerOWins==false)){
             elem.target.textContent=player
             elem.target.classList.add(player)
         }
-        
-
     }
-
-    //put function here 
-
-    //document.getElementsByTagName("div")
-//console.log(document.querySelectorAll("#board div"));
 
     squares.forEach(function(elem, index) {
         elem.setAttribute('id', index);
@@ -57,9 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
         elem.addEventListener("click",function(e){
             if (player=="X"){
                 makePlay(player, e)
-                //e.target.textContent="X";
-                //e.target.classList.add('X');
-                //winner.push("X");
                 playerX.push(e.target.id);
                 playerXWins=checkWinner(winningCombo,playerX);
                 if (playerXWins==true){
@@ -67,20 +57,14 @@ window.addEventListener('DOMContentLoaded', () => {
                     gameStatus.classList.add("you-won")
                 }
                 player="O";
-                //call back function here
-
             }
             else {
                 makePlay(player, e)
-                //e.target.textContent="O";
-                //e.target.classList.add('O');
-                //winner.push("O");
                 playerO.push(e.target.id);
                 playerOWins=checkWinner(winningCombo,playerO);
                 if (playerOWins==true){
                     gameStatus.innerHTML="Congratulations! O is the Winner!"
                     gameStatus.classList.add("you-won")
-
                 }
                 player="X";
               
@@ -90,19 +74,17 @@ window.addEventListener('DOMContentLoaded', () => {
             console.log(checkWinner(winningCombo,playerO));
             console.log(checkWinner(winningCombo,playerX));
             });
+
             elem.addEventListener('mouseover', function(e) {
                 e.target.classList.add('hover');
             });
         
             elem.addEventListener('mouseout', function(e) {
                 e.target.classList.remove('hover');
-            });
-
-           
-        
+            });   
     });
     //console.log(newGameBtns)
-    newGameBtns.forEach(function(button){
+    newGameBtn.forEach(function(button){
         button.addEventListener("click", function(e){
             squares.forEach(function(elem,index){
                 elem.textContent="";
@@ -111,9 +93,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 gameStatus.innerHTML="Move your mouse over a square and click to play an X or an O."
                 gameStatus.classList.remove("you-won")
             })
-
         })
-    
     })
-
 });
